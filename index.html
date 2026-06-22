@@ -15,6 +15,7 @@
 
   <title>Laughing Language Model</title>
 
+  <!-- Google Font -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
@@ -23,17 +24,27 @@
     rel="stylesheet"
   >
 
+  <!-- Main stylesheet -->
   <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
-  <div class="background-shape background-shape-one"></div>
-  <div class="background-shape background-shape-two"></div>
+  <!-- Decorative background shapes -->
+  <div
+    class="background-shape background-shape-one"
+    aria-hidden="true"
+  ></div>
+
+  <div
+    class="background-shape background-shape-two"
+    aria-hidden="true"
+  ></div>
 
   <main class="hero">
+    <!-- Left side -->
     <section class="hero-content">
       <div class="badge">
-        <span class="badge-dot"></span>
+        <span class="badge-dot" aria-hidden="true"></span>
         Conversational AI Demo
       </div>
 
@@ -53,7 +64,10 @@
 
           <div>
             <h2>Tell me a joke</h2>
-            <p>Get a fresh joke retrieved through JokeAPI.</p>
+
+            <p>
+              Get a fresh joke retrieved through JokeAPI.
+            </p>
           </div>
         </article>
 
@@ -62,7 +76,10 @@
 
           <div>
             <h2>Learn about comedy</h2>
-            <p>Explore jokes, stand-up comedy and humor history.</p>
+
+            <p>
+              Explore jokes, stand-up comedy and humor history.
+            </p>
           </div>
         </article>
 
@@ -71,71 +88,81 @@
 
           <div>
             <h2>AI-powered</h2>
-            <p>Built with Moveo.ai Conversational AI.</p>
+
+            <p>
+              Built with Moveo.ai Conversational AI.
+            </p>
           </div>
         </article>
       </div>
 
       <div class="hero-actions">
-        <button id="try-chat-button" class="primary-button" type="button">
+        <button
+          id="try-chat-button"
+          class="primary-button"
+          type="button"
+        >
           Try it now
           <span aria-hidden="true">→</span>
         </button>
 
-        <p>Open the chat and ask anything about jokes or comedy.</p>
+        <p>
+          Ask anything about jokes or comedy.
+        </p>
       </div>
     </section>
 
-    <section class="embedded-chat-section" aria-label="Laughing Language Model chat">
-      <div id="embed"></div>
+    <!-- Right side: real embedded Moveo chat -->
+    <section
+      class="embedded-chat-section"
+      aria-label="Laughing Language Model chat"
+    >
+      <div id="embed">
+        <noscript>
+          JavaScript is required to load the chat.
+        </noscript>
+      </div>
     </section>
   </main>
 
-  <div id="chat-hint" class="chat-hint" role="status">
-    Open the live chat from the bottom-right corner.
-  </div>
-
-  <!-- Keep your real Moveo integration ID here -->
+  <!-- Moveo Web Client -->
   <script src="https://web.moveo.ai/web-client.min.js"></script>
 
   <script>
+    const chatContainer = document.getElementById("embed");
+    const tryChatButton = document.getElementById("try-chat-button");
+
     MoveoAI.init({
-      integrationId: "6075aef4-43c2-4ec8-b4df-3f033893f25c"
-      element: document.getElementById("embed")
+      integrationId: "6075aef4-43c2-4ec8-b4df-3f033893f25c",
+      element: chatContainer
     })
       .then(() => {
         console.log("Moveo Connected");
       })
       .catch((error) => {
         console.error("Moveo connection error:", error);
+
+        chatContainer.innerHTML = `
+          <div
+            style="
+              padding: 32px;
+              font-family: Arial, sans-serif;
+              text-align: center;
+              color: #596078;
+            "
+          >
+            The chat could not be loaded. Please refresh the page.
+          </div>
+        `;
       });
 
-    const tryButton = document.getElementById("try-chat-button");
-    const quickOptionButtons = document.querySelectorAll(
-      "[data-question]"
-    );
-    const chatHint = document.getElementById("chat-hint");
-
-    function showChatHint(question = "") {
-      chatHint.textContent = question
-        ? `Open the chat and try: “${question}”`
-        : "Open the live chat from the bottom-right corner.";
-
-      chatHint.classList.add("chat-hint-visible");
-
-      window.setTimeout(() => {
-        chatHint.classList.remove("chat-hint-visible");
-      }, 4000);
-    }
-
-    tryButton.addEventListener("click", () => {
-      showChatHint();
-    });
-
-    quickOptionButtons.forEach((button) => {
-      button.addEventListener("click", () => {
-        showChatHint(button.dataset.question);
+    tryChatButton.addEventListener("click", () => {
+      chatContainer.scrollIntoView({
+        behavior: "smooth",
+        block: "center"
       });
+
+      chatContainer.focus?.();
     });
   </script>
 </body>
