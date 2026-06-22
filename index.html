@@ -2,58 +2,207 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+
   <meta
     name="viewport"
     content="width=device-width, initial-scale=1.0"
   >
+
+  <meta
+    name="description"
+    content="Laughing Language Model — an AI assistant for jokes and comedy history."
+  >
+
   <title>Laughing Language Model</title>
 
-  <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: #f5f7fb;
-      color: #182033;
-      text-align: center;
-    }
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-    main {
-      max-width: 700px;
-      margin: 100px auto;
-      padding: 30px;
-    }
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet"
+  >
 
-    h1 {
-      margin-bottom: 12px;
-    }
-
-    p {
-      line-height: 1.6;
-    }
-  </style>
+  <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
-  <main>
-    <h1>Laughing Language Model</h1>
+  <div class="background-shape background-shape-one"></div>
+  <div class="background-shape background-shape-two"></div>
 
-    <p>
-      Ask me to tell you a joke or ask me about the history of comedy.
-    </p>
+  <main class="hero">
+    <section class="hero-content">
+      <div class="badge">
+        <span class="badge-dot"></span>
+        Conversational AI Demo
+      </div>
 
-    <p>
-      Try: “Can you tell me a joke?”
-    </p>
+      <h1>
+        <span>Laughing</span>
+        <strong>Language Model</strong>
+      </h1>
+
+      <p class="hero-description">
+        Your friendly AI assistant for jokes, comedy history,
+        and everything that makes us laugh.
+      </p>
+
+      <div class="features">
+        <article class="feature">
+          <div class="feature-icon" aria-hidden="true">☺</div>
+
+          <div>
+            <h2>Tell me a joke</h2>
+            <p>Get a fresh joke retrieved through JokeAPI.</p>
+          </div>
+        </article>
+
+        <article class="feature">
+          <div class="feature-icon" aria-hidden="true">⌑</div>
+
+          <div>
+            <h2>Learn about comedy</h2>
+            <p>Explore jokes, stand-up comedy and humor history.</p>
+          </div>
+        </article>
+
+        <article class="feature">
+          <div class="feature-icon" aria-hidden="true">ϟ</div>
+
+          <div>
+            <h2>AI-powered</h2>
+            <p>Built with Moveo.ai Conversational AI.</p>
+          </div>
+        </article>
+      </div>
+
+      <div class="hero-actions">
+        <button id="try-chat-button" class="primary-button" type="button">
+          Try it now
+          <span aria-hidden="true">→</span>
+        </button>
+
+        <p>Open the chat and ask anything about jokes or comedy.</p>
+      </div>
+    </section>
+
+    <section class="chat-preview" aria-label="Chat preview">
+      <header class="chat-header">
+        <div class="avatar-wrapper">
+          <img
+            src="assets/laughing-language-model-avatar.png"
+            alt="Laughing Language Model avatar"
+          >
+
+          <span class="online-indicator"></span>
+        </div>
+
+        <div>
+          <h2>Laughing Language Model</h2>
+          <p>Online</p>
+        </div>
+
+        <button
+          class="menu-button"
+          type="button"
+          aria-label="More options"
+        >
+          ⋮
+        </button>
+      </header>
+
+      <div class="chat-body">
+        <div class="assistant-message">
+          <img
+            src="assets/laughing-language-model-avatar.png"
+            alt=""
+          >
+
+          <div class="message-bubble">
+            <p>
+              Hi! I’m your comedy assistant 🤖
+            </p>
+
+            <p>
+              Ask me for a joke or explore the history of comedy!
+            </p>
+          </div>
+        </div>
+
+        <div class="quick-options">
+          <button type="button" data-question="Can you tell me a joke?">
+            Can you tell me a joke?
+          </button>
+
+          <button type="button" data-question="What is stand-up comedy?">
+            What is stand-up comedy?
+          </button>
+
+          <button
+            type="button"
+            data-question="What is the oldest recorded joke?"
+          >
+            What is the oldest recorded joke?
+          </button>
+        </div>
+
+        <div class="preview-input">
+          <span>Open the chat to start...</span>
+          <span class="send-icon" aria-hidden="true">➤</span>
+        </div>
+
+        <p class="preview-note">
+          Use the live chat button in the bottom-right corner.
+        </p>
+      </div>
+    </section>
   </main>
 
-  <!-- Moveo snippet -->
-<script src="https://web.moveo.ai/web-client.min.js"></script>
-<script>
-  MoveoAI.init({ 
-    integrationId: "6075aef4-43c2-4ec8-b4df-3f033893f25c"
-  })
-    .then((desk) => console.log("Moveo Connected"))
-    .catch((error) => console.error(error));
-</script>
+  <div id="chat-hint" class="chat-hint" role="status">
+    Open the live chat from the bottom-right corner.
+  </div>
+
+  <!-- Keep your real Moveo integration ID here -->
+  <script src="https://web.moveo.ai/web-client.min.js"></script>
+
+  <script>
+    MoveoAI.init({
+      integrationId: "6075aef4-43c2-4ec8-b4df-3f033893f25c"
+    })
+      .then(() => {
+        console.log("Moveo Connected");
+      })
+      .catch((error) => {
+        console.error("Moveo connection error:", error);
+      });
+
+    const tryButton = document.getElementById("try-chat-button");
+    const quickOptionButtons = document.querySelectorAll(
+      "[data-question]"
+    );
+    const chatHint = document.getElementById("chat-hint");
+
+    function showChatHint(question = "") {
+      chatHint.textContent = question
+        ? `Open the chat and try: “${question}”`
+        : "Open the live chat from the bottom-right corner.";
+
+      chatHint.classList.add("chat-hint-visible");
+
+      window.setTimeout(() => {
+        chatHint.classList.remove("chat-hint-visible");
+      }, 4000);
+    }
+
+    tryButton.addEventListener("click", () => {
+      showChatHint();
+    });
+
+    quickOptionButtons.forEach((button) => {
+      button.addEventListener("click", () => {
+        showChatHint(button.dataset.question);
+      });
+    });
+  </script>
 </body>
 </html>
