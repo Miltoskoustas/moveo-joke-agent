@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+  <title>Laughing Language Model</title>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f5f7fb;
+      color: #182033;
+      text-align: center;
+    }
+
+    main {
+      max-width: 700px;
+      margin: 100px auto;
+      padding: 30px;
+    }
+
+    h1 {
+      margin-bottom: 12px;
+    }
+
+    p {
+      line-height: 1.6;
+    }
+  </style>
+</head>
+
+<body>
+  <main>
+    <h1>Laughing Language Model</h1>
+
+    <p>
+      Ask me to tell you a joke or ask me about the history of comedy.
+    </p>
+
+    <p>
+      Try: “Can you tell me a joke?”
+    </p>
+  </main>
+
+  <!-- Moveo snippet -->
+<script src="https://web.moveo.ai/web-client.min.js"></script>
+<script>
+  MoveoAI.init({ 
+    integrationId: "6075aef4-43c2-4ec8-b4df-3f033893f25c"
+  })
+    .then((desk) => console.log("Moveo Connected"))
+    .catch((error) => console.error(error));
+</script>
+</body>
+</html>
