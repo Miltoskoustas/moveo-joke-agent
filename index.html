@@ -86,75 +86,8 @@
       </div>
     </section>
 
-    <section class="chat-preview" aria-label="Chat preview">
-      <header class="chat-header">
-        <div class="avatar-wrapper">
-          <img
-            src="assets/laughing-language-model-avatar.png"
-            alt="Laughing Language Model avatar"
-          >
-
-          <span class="online-indicator"></span>
-        </div>
-
-        <div>
-          <h2>Laughing Language Model</h2>
-          <p>Online</p>
-        </div>
-
-        <button
-          class="menu-button"
-          type="button"
-          aria-label="More options"
-        >
-          ⋮
-        </button>
-      </header>
-
-      <div class="chat-body">
-        <div class="assistant-message">
-          <img
-            src="assets/laughing-language-model-avatar.png"
-            alt=""
-          >
-
-          <div class="message-bubble">
-            <p>
-              Hi! I’m your comedy assistant 🤖
-            </p>
-
-            <p>
-              Ask me for a joke or explore the history of comedy!
-            </p>
-          </div>
-        </div>
-
-        <div class="quick-options">
-          <button type="button" data-question="Can you tell me a joke?">
-            Can you tell me a joke?
-          </button>
-
-          <button type="button" data-question="What is stand-up comedy?">
-            What is stand-up comedy?
-          </button>
-
-          <button
-            type="button"
-            data-question="What is the oldest recorded joke?"
-          >
-            What is the oldest recorded joke?
-          </button>
-        </div>
-
-        <div class="preview-input">
-          <span>Open the chat to start...</span>
-          <span class="send-icon" aria-hidden="true">➤</span>
-        </div>
-
-        <p class="preview-note">
-          Use the live chat button in the bottom-right corner.
-        </p>
-      </div>
+    <section class="embedded-chat-section" aria-label="Laughing Language Model chat">
+      <div id="embed"></div>
     </section>
   </main>
 
@@ -168,6 +101,7 @@
   <script>
     MoveoAI.init({
       integrationId: "6075aef4-43c2-4ec8-b4df-3f033893f25c"
+      element: document.getElementById("embed")
     })
       .then(() => {
         console.log("Moveo Connected");
